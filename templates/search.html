@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/search.css" />
+
+    <title>{{title}}</title>
+</head>
+
+<body>
+    <section>
+        <h1>{{keyword}}</h1>
+        
+        <p class="header-p">
+            <a href="/" class="export">Job-Research</a>
+            {% if jobs_remoteok|length > 0 or jobs_wwk|length > 0 %}
+            |
+            <a href="/export?keyword={{keyword}}&by=all" class="export">Export to file all</a>
+            {% endif %}
+        </p>
+
+        <hr>
+
+        <!-- remoteok -->
+        <div>
+            <span>📌</span><span class="find-title">finded by remoteok : {{jobs_remoteok|length}}건</span>
+            <span>
+                {% if jobs_remoteok|length > 0 %}
+                <a href="/export?keyword={{keyword}}&by=remoteok" class="export">Export to file finded by remoteok</a>
+                {% endif %}
+            </span>
+        </div>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Position</th>
+                        <th>Location</th>
+                        <th>Time<br>Salary</th>
+                        <th>Tag</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    {% for job in jobs_remoteok %}
+                    <tr>
+                        <td>
+                            <div class="company">
+                                <img src="{{job['logo']}}"/>
+                                <span>{{job['company']}}</span>
+                            </div>
+                        </td>
+                        <td><span>{{job['position']}}</span></td>
+                        <td>
+                            {% for location in job['location'] %}
+                            <span>{{location}}</span>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <p><span>{{job['time']}}</span></p>
+                            <span>{{job['salary']}}</span>
+                        </td>
+                        <td>
+                            {% for tag in job['tag'] %}
+                            <span>{{tag}}</span>
+                            {% endfor %}
+                        </td>
+                        <td><a href="{{job['link']}}" class="export" target="_blank">Detail View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- // remoteok -->
+
+        <!-- wwk -->
+        <div>
+            <span>📌</span><span class="find-title">finded by weworkremotely : {{jobs_wwk|length}}건</span>
+            <span>
+                {% if jobs_wwk|length > 0 %}
+                <a href="/export?keyword={{keyword}}&by=wwk" class="export">Export to file finded by weworkremotely</a>
+                {% endif %}
+            </span>
+        </div>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Position</th>
+                        <th>Location</th>
+                        <th>Time</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    {% for job in jobs_wwk %}
+                    <tr>
+                        <td>
+                            <div class="company">
+                                <img src="{{job['logo']}}"/>
+                                <span>{{job['company']}}</span>
+                            </div>
+                        </td>
+                        <td><span>{{job['position']}}</span></td>
+                        <td><span>{{job['location']}}</span></td>
+                        <td><span>{{job['time']}}</span></td>
+                        <td><a href="{{job['link']}}" class="export" target="_blank">Detail View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- // wwk -->
+    </section>
+</body>
+
+</html>

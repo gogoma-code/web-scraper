@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picocss/1.5.3/pico.min.css" integrity="sha512-2MD814AVKlRmLMNeIKnmSSJEaI1gFz742oiIWCkRDZ3ZoN8lALOPN71gCCya8WItuZNfrulKl5jnLOVIhtGY+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Job Scrapper</title>
+</head>
+<body>
+    <h1>Search Result : {{keyword}}</h1>
+    <a target="_blank" href="/export?keyword={{keyword}}">Export to file</a>
+
+    {% for job in jobs %}
+    <div>
+        <span>{{job.position}}</span>
+        <span>{{job.company}}</span>
+        <span>{{job.location}}</span>
+        <a href="{{job.link}}" target="_blank">Apply now&rarr;</a>
+    </div>
+    {% endfor %}
+</body>
+</html>
